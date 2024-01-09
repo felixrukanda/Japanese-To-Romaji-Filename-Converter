@@ -24,11 +24,11 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
         public FileConverter() {
         }
 
-        public void Convert(IEnumerable<string> files) {
-            Convert(files, CancellationToken.None);
+        public void Convert(IEnumerable<string> files, bool convertFileName, bool convertTitle, bool convertArtist, bool convertAlbum, bool convertAlbumArtist) {
+            Convert(files, CancellationToken.None, convertFileName, convertTitle, convertArtist, convertAlbum, convertAlbumArtist);
         }
 
-        public void Convert(IEnumerable<string> files, CancellationToken ct) {
+        public void Convert(IEnumerable<string> files, CancellationToken ct, bool convertFileName, bool convertTitle, bool convertArtist, bool convertAlbum, bool convertAlbumArtist) {
             // Convert each file
             foreach (string filePath in files) {
                 // Check if function has been cancelled if called asynchronously
@@ -74,15 +74,30 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
                 }
 
                 // Translate
-                string newFileName = TextTranslator.Translate(fileName);
-                title = TextTranslator.Translate(title);
-                album = TextTranslator.Translate(album);
+                string newFileName = "";
+                string newFilePath = "";
 
-                for (int i = 0; i < performers.Length; i++) {
-                    performers[i] = TextTranslator.Translate(performers[i]);
+                if(convertFileName)
+                    newFileName = TextTranslator.Translate(fileName);
+
+                if(convertTitle)
+                    title = TextTranslator.Translate(title);
+
+                if(convertAlbum)
+                    album = TextTranslator.Translate(album);
+
+                if(convertArtist) {
+
+                    for(int i = 0; i < performers.Length; i++) {
+                        performers[i] = TextTranslator.Translate(performers[i]);
+                    }
                 }
-                for (int i = 0; i < albumArtists.Length; i++) {
-                    albumArtists[i] = TextTranslator.Translate(albumArtists[i]);
+
+                if(convertAlbumArtist) {
+
+                    for(int i = 0; i < albumArtists.Length; i++) {
+                        albumArtists[i] = TextTranslator.Translate(albumArtists[i]);
+                    }
                 }
 
                 // Check if function has been cancelled if called asynchronously
@@ -91,19 +106,22 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
                 }
 
                 // Replace illegal filename characters from the new filename
-                foreach (string s in IllegalFilenameMap.Keys) {
-                    string sVal;
-                    if (IllegalFilenameMap.TryGetValue(s, out sVal)) {
-                        newFileName = newFileName.Replace(s, sVal);
-                    }
-                }
+                if(convertFileName) {
 
-                string newFilePath = directoryPath + Path.DirectorySeparatorChar + newFileName + extension;
-                if (File.Exists(newFilePath)) {
-                    ConversionData existingData = new ConversionData(newFilePath);
-                    ConversionItem item = new ConversionItem(oldData, existingData);
-                    OnProgressEvent(ProgressEvent.FileAlreadyExists, item);
-                    continue;
+                    foreach(string s in IllegalFilenameMap.Keys) {
+                        string sVal;
+                        if(IllegalFilenameMap.TryGetValue(s, out sVal)) {
+                            newFileName = newFileName.Replace(s, sVal);
+                        }
+                    }
+
+                    newFilePath = directoryPath + Path.DirectorySeparatorChar + newFileName + extension;
+                    if(File.Exists(newFilePath)) {
+                        ConversionData existingData = new ConversionData(newFilePath);
+                        ConversionItem item = new ConversionItem(oldData, existingData);
+                        OnProgressEvent(ProgressEvent.FileAlreadyExists, item);
+                        continue;
+                    }
                 }
 
                 // Set new tags
@@ -115,7 +133,8 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
                     tagFile.Save();
                 }
 
-                File.Move(filePath, newFilePath);
+                if(convertFileName)
+                    File.Move(filePath, newFilePath);
 
                 // Store new conversion data
                 ConversionData newData = new ConversionData(newFilePath,

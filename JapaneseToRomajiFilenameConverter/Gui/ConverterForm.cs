@@ -43,7 +43,7 @@ namespace JapaneseToRomajiFilenameConverter {
             }
         }
 
-        public async void ConvertFiles(List<string> files) {
+        public async void ConvertFiles(List<string> files, bool convertFileName, bool convertTitle, bool convertArtist, bool convertAlbum, bool convertAlbumArtist) {
             TotalFiles = files.Count;
 
             FileConverter fileConverter = new FileConverter();
@@ -53,7 +53,7 @@ namespace JapaneseToRomajiFilenameConverter {
             FileConversionTaskCts = new CancellationTokenSource();
             FileConversionTask = Task.Factory.StartNew(() => {
                 try {
-                    fileConverter.Convert(files, FileConversionTaskCts.Token);
+                    fileConverter.Convert(files, FileConversionTaskCts.Token, convertFileName, convertTitle, convertArtist, convertAlbum, convertAlbumArtist);
                 } catch (OperationCanceledException) {
                     // Task cancelled
                 }

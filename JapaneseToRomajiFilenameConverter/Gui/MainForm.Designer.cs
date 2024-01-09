@@ -35,6 +35,11 @@ namespace JapaneseToRomajiFilenameConverter {
             this.selectedFilesLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.HistoryBTN = new System.Windows.Forms.Button();
             this.FilesBox = new JapaneseToRomajiFilenameConverter.Gui.FileBox();
+            this.FileName = new System.Windows.Forms.CheckBox();
+            this.Title = new System.Windows.Forms.CheckBox();
+            this.Artist = new System.Windows.Forms.CheckBox();
+            this.Album = new System.Windows.Forms.CheckBox();
+            this.AlbumArtist = new System.Windows.Forms.CheckBox();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,7 +119,7 @@ namespace JapaneseToRomajiFilenameConverter {
             // totalFilesLabel
             // 
             this.totalFilesLabel.Name = "totalFilesLabel";
-            this.totalFilesLabel.Size = new System.Drawing.Size(72, 17);
+            this.totalFilesLabel.Size = new System.Drawing.Size(70, 17);
             this.totalFilesLabel.Text = "Total Files: 0";
             // 
             // selectedFilesLabel
@@ -151,11 +156,81 @@ namespace JapaneseToRomajiFilenameConverter {
             this.FilesBox.TabIndex = 0;
             this.FilesBox.SelectedIndexChanged += new System.EventHandler(this.FilesBox_SelectedIndexChanged);
             // 
+            // FileName
+            // 
+            this.FileName.AutoSize = true;
+            this.FileName.Checked = true;
+            this.FileName.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.FileName.Location = new System.Drawing.Point(1103, 124);
+            this.FileName.Name = "FileName";
+            this.FileName.Size = new System.Drawing.Size(73, 17);
+            this.FileName.TabIndex = 6;
+            this.FileName.Text = "File Name";
+            this.FileName.UseVisualStyleBackColor = true;
+            this.FileName.CheckedChanged += new System.EventHandler(this.FileName_CheckedChanged);
+            // 
+            // Title
+            // 
+            this.Title.AutoSize = true;
+            this.Title.Checked = true;
+            this.Title.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.Title.Location = new System.Drawing.Point(1103, 147);
+            this.Title.Name = "Title";
+            this.Title.Size = new System.Drawing.Size(46, 17);
+            this.Title.TabIndex = 7;
+            this.Title.Text = "Title";
+            this.Title.UseVisualStyleBackColor = true;
+            this.Title.CheckedChanged += new System.EventHandler(this.Title_CheckedChanged);
+            // 
+            // Artist
+            // 
+            this.Artist.AutoSize = true;
+            this.Artist.Checked = true;
+            this.Artist.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.Artist.Location = new System.Drawing.Point(1103, 170);
+            this.Artist.Name = "Artist";
+            this.Artist.Size = new System.Drawing.Size(49, 17);
+            this.Artist.TabIndex = 8;
+            this.Artist.Text = "Artist";
+            this.Artist.UseVisualStyleBackColor = true;
+            this.Artist.CheckedChanged += new System.EventHandler(this.Artist_CheckedChanged);
+            // 
+            // Album
+            // 
+            this.Album.AutoSize = true;
+            this.Album.Checked = true;
+            this.Album.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.Album.Location = new System.Drawing.Point(1103, 193);
+            this.Album.Name = "Album";
+            this.Album.Size = new System.Drawing.Size(55, 17);
+            this.Album.TabIndex = 9;
+            this.Album.Text = "Album";
+            this.Album.UseVisualStyleBackColor = true;
+            this.Album.CheckedChanged += new System.EventHandler(this.Album_CheckedChanged);
+            // 
+            // AlbumArtist
+            // 
+            this.AlbumArtist.AutoSize = true;
+            this.AlbumArtist.Checked = true;
+            this.AlbumArtist.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AlbumArtist.Location = new System.Drawing.Point(1102, 216);
+            this.AlbumArtist.Name = "AlbumArtist";
+            this.AlbumArtist.Size = new System.Drawing.Size(81, 17);
+            this.AlbumArtist.TabIndex = 10;
+            this.AlbumArtist.Text = "Album Artist";
+            this.AlbumArtist.UseVisualStyleBackColor = true;
+            this.AlbumArtist.CheckedChanged += new System.EventHandler(this.AlbumArtist_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1209, 550);
+            this.Controls.Add(this.AlbumArtist);
+            this.Controls.Add(this.Album);
+            this.Controls.Add(this.Artist);
+            this.Controls.Add(this.Title);
+            this.Controls.Add(this.FileName);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.DragDropLabel);
             this.Controls.Add(this.ClearBTN);
@@ -186,6 +261,11 @@ namespace JapaneseToRomajiFilenameConverter {
         private System.Windows.Forms.ToolStripStatusLabel selectedFilesLabel;
         private System.Windows.Forms.Button HistoryBTN;
         private FileBox FilesBox;
+        private System.Windows.Forms.CheckBox FileName;
+        private System.Windows.Forms.CheckBox Title;
+        private System.Windows.Forms.CheckBox Artist;
+        private System.Windows.Forms.CheckBox Album;
+        private System.Windows.Forms.CheckBox AlbumArtist;
     }
 }
 

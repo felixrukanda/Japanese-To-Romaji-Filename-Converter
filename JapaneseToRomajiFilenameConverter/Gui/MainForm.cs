@@ -13,6 +13,12 @@ namespace JapaneseToRomajiFilenameConverter {
 
         private CancellationTokenSource AddFilesCts;
 
+        bool convertFileName;
+        bool convertTitle;
+        bool convertArtist;
+        bool convertAlbum;
+        bool convertAlbumArtist;
+
         public MainForm() {
             InitializeComponent();
 
@@ -38,7 +44,7 @@ namespace JapaneseToRomajiFilenameConverter {
                 files.Add(item.ToString());
             }
 
-            convertForm.ConvertFiles(files);
+            convertForm.ConvertFiles(files, convertFileName, convertTitle, convertArtist, convertAlbum, convertAlbumArtist);
             convertForm.ShowDialog();
         }
 
@@ -171,6 +177,44 @@ namespace JapaneseToRomajiFilenameConverter {
                     // ignored
                 }
             }, ct);
+        }
+
+        private void FileName_CheckedChanged(object sender, EventArgs e) {
+
+            convertFileName = FileName.Checked;
+            CheckConvertButton();
+        }
+
+        private void Title_CheckedChanged(object sender, EventArgs e) {
+
+            convertTitle = Title.Checked;
+            CheckConvertButton();
+        }
+
+        private void Artist_CheckedChanged(object sender, EventArgs e) {
+
+            convertArtist = Artist.Checked;
+            CheckConvertButton();
+        }
+
+        private void Album_CheckedChanged(object sender, EventArgs e) {
+
+            convertAlbum = Album.Checked;
+            CheckConvertButton();
+        }
+
+        private void AlbumArtist_CheckedChanged(object sender, EventArgs e) {
+
+            convertAlbumArtist = AlbumArtist.Checked;
+            CheckConvertButton();
+        }
+
+        private void CheckConvertButton() {
+
+            if(convertFileName == convertTitle == convertArtist == convertAlbum == convertAlbumArtist == false)
+                ConvertBTN.Enabled = false;
+            else if(FilesBox.Items.Count > 0)
+                ConvertBTN.Enabled = true;
         }
     }
 }
