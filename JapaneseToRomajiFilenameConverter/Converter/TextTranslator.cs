@@ -3,25 +3,30 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace JapaneseToRomajiFilenameConverter.Converter {
     public class TextTranslator {
 
-        public const string LanguagePair = "ja|en";
-
-        private const string TranslatorUrl = "https://www.google.com/translate_t?hl=en&ie=UTF8&text={0}&langpair={1}";
-
+        // kanji & hiragana use pykakashi
+        // katakana use libretranslate
+        private const string TranslatorUrlHiraganaKanji = "http://127.0.0.2:5000/translate";
+        private const string TranslatorUrlKatakana = "http://127.0.0.1:5000/translate";
         private static char MapSplitChar = ':';
 
         private static List<string> Suffixes = new List<string>() {
             "Iru"
         };
 
-        public static string GetTranslatorUrl(string text, string languagePair = LanguagePair) {
-            return string.Format(TranslatorUrl, text, languagePair);
+        public static string GetTranslatorUrl(bool isHiraganaKanji) {
+
+            if(isHiraganaKanji)
+                return string.Format(TranslatorUrlHiraganaKanji);
+            else
+                return string.Format(TranslatorUrlKatakana);
         }
 
-        public static string Translate(string inText, string languagePair = LanguagePair) {
+        public static async Task<string> TranslateAsync(string inText) {
             // Check if already translated / romanized
             // TODO check japanese punctuation too
             // if (IsTranslated(inText)) return inText;
@@ -50,16 +55,16 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
             foreach (TextToken textToken in textTokens) {
                 switch (textToken.Type) {
                     case TokenType.HiraganaKanji:
-                        outText += textToken.Translate(hirakanjiMaps, hirakanjiParticles);
+                        outText += await textToken.TranslateAsync(hirakanjiMaps, hirakanjiParticles);
                         break;
 
                     case TokenType.Katakana:
-                        outText += textToken.Translate(kataMaps, kataParticles);
+                        outText += await textToken.TranslateAsync(kataMaps, kataParticles);
                         break;
 
                     case TokenType.Latin:
                     default:
-                        outText += textToken.Translate();
+                        outText += await textToken.TranslateAsync();
                         break;
                 }
             }

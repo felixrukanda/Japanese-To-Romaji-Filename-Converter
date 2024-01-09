@@ -51,13 +51,13 @@ namespace JapaneseToRomajiFilenameConverter {
 
             // Async file conversion task
             FileConversionTaskCts = new CancellationTokenSource();
-            FileConversionTask = Task.Factory.StartNew(() => {
+            FileConversionTask = fileConverter.ConvertAsync(files, FileConversionTaskCts.Token, convertFileName, convertTitle, convertArtist, convertAlbum, convertAlbumArtist);/*Task.Factory.StartNew(() => {
                 try {
-                    fileConverter.Convert(files, FileConversionTaskCts.Token, convertFileName, convertTitle, convertArtist, convertAlbum, convertAlbumArtist);
+                    fileConverter.Convert(files, FileConversionTaskCts.Token);
                 } catch (OperationCanceledException) {
                     // Task cancelled
                 }
-            });
+            });*/
             await FileConversionTask;
         }
 

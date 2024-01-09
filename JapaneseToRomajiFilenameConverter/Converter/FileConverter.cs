@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace JapaneseToRomajiFilenameConverter.Converter {
     public class FileConverter {
@@ -24,11 +25,11 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
         public FileConverter() {
         }
 
-        public void Convert(IEnumerable<string> files, bool convertFileName, bool convertTitle, bool convertArtist, bool convertAlbum, bool convertAlbumArtist) {
-            Convert(files, CancellationToken.None, convertFileName, convertTitle, convertArtist, convertAlbum, convertAlbumArtist);
+        public async Task ConvertAsync(IEnumerable<string> files, bool convertFileName, bool convertTitle, bool convertArtist, bool convertAlbum, bool convertAlbumArtist) {
+            await ConvertAsync(files, CancellationToken.None, convertFileName, convertTitle, convertArtist, convertAlbum, convertAlbumArtist);
         }
 
-        public void Convert(IEnumerable<string> files, CancellationToken ct, bool convertFileName, bool convertTitle, bool convertArtist, bool convertAlbum, bool convertAlbumArtist) {
+        public async Task ConvertAsync(IEnumerable<string> files, CancellationToken ct, bool convertFileName, bool convertTitle, bool convertArtist, bool convertAlbum, bool convertAlbumArtist) {
             // Convert each file
             foreach (string filePath in files) {
                 // Check if function has been cancelled if called asynchronously
@@ -78,25 +79,25 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
                 string newFilePath = "";
 
                 if(convertFileName)
-                    newFileName = TextTranslator.Translate(fileName);
+                    newFileName = await TextTranslator.TranslateAsync(fileName);
 
                 if(convertTitle)
-                    title = TextTranslator.Translate(title);
+                    title = await TextTranslator.TranslateAsync(title);
 
                 if(convertAlbum)
-                    album = TextTranslator.Translate(album);
+                    album = await TextTranslator.TranslateAsync(album);
 
                 if(convertArtist) {
 
                     for(int i = 0; i < performers.Length; i++) {
-                        performers[i] = TextTranslator.Translate(performers[i]);
+                        performers[i] = await TextTranslator.TranslateAsync(performers[i]);
                     }
                 }
 
                 if(convertAlbumArtist) {
 
                     for(int i = 0; i < albumArtists.Length; i++) {
-                        albumArtists[i] = TextTranslator.Translate(albumArtists[i]);
+                        albumArtists[i] = await TextTranslator.TranslateAsync(albumArtists[i]);
                     }
                 }
 

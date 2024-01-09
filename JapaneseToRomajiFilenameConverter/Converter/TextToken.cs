@@ -1,11 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net;
-using HtmlAgilityPack;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace JapaneseToRomajiFilenameConverter.Converter {
+
     public class TextToken {
+
+        public class ServerResponse {
+
+            public string translatedText { get; set; }
+        }
+
+        private static readonly HttpClient client = new HttpClient();
 
         public TokenType Type { get; private set; }
         public string Text { get; set; }
@@ -217,35 +227,48 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
         // 1. Latin - Don't translate
         // 2. Katakana - Translate to output language
         // 3. Hiragana / Kanji - Translate to phonetic
-        public string Translate(List<string> maps = null,
-                                List<string> particles = null,
-                                string languagePair = TextTranslator.LanguagePair) {
+        public async Task<string> TranslateAsync(List<string> maps = null,
+                                List<string> particles = null) {
             string translation = "";
 
             switch (Type) {
+
                 case TokenType.HiraganaKanji: {
-                    // Get phoentic text
-                    string url = TextTranslator.GetTranslatorUrl(Text, languagePair);
-                    HtmlDocument doc = new HtmlWeb().Load(url);
-                    string phoneticText = WebUtility.HtmlDecode(doc.GetElementbyId("src-translit").InnerText);
-                    translation = FormatTranslation(phoneticText, maps, particles);
-                    break;
-                }
+                        // Get phoentic text
+                        string url = TextTranslator.GetTranslatorUrl(true);
+
+                        var values = new Dictionary<string, string> {
+                            { "q", Text }
+                        };
+
+                        var response = await client.PostAsJsonAsync(url, values, JsonSerializerOptions.Default);
+                        var responseContent = await response.Content.ReadFromJsonAsync<ServerResponse>();
+                        translation = FormatTranslation(responseContent.translatedText, maps, particles);
+                        break;
+                    }
 
                 case TokenType.Katakana: {
-                    // Get translated text
-                    string url = TextTranslator.GetTranslatorUrl(Text, languagePair);
-                    HtmlDocument doc = new HtmlWeb().Load(url);
-                    string translatedText = WebUtility.HtmlDecode(doc.GetElementbyId("result_box").InnerText);
-                    translation = FormatTranslation(translatedText, maps, particles);
-                    break;
-                }
+                        // Get translated text
+                        string url = TextTranslator.GetTranslatorUrl(false);
+
+                        var values = new Dictionary<string, string> {
+                            { "q", Text },
+                            { "source", "ja" },
+                            { "target", "en" },
+                            { "format", "text" }
+                        };
+
+                        var response = await client.PostAsJsonAsync(url, values, JsonSerializerOptions.Default);
+                        var responseContent = await response.Content.ReadFromJsonAsync<ServerResponse>();
+                        translation = FormatTranslation(responseContent.translatedText, maps, particles);
+                        break;
+                    }
 
                 case TokenType.Latin:
                 default: {
-                    translation = FormatTranslation(Text, maps, particles);
-                    break;
-                }
+                        translation = FormatTranslation(Text, maps, particles);
+                        break;
+                    }
             }
 
             return translation;
