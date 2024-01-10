@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using JapaneseToRomajiFilenameConverter.Converter;
 using JapaneseToRomajiFilenameConverter.Gui;
 using File = System.IO.File;
 
@@ -25,6 +26,7 @@ namespace JapaneseToRomajiFilenameConverter {
             AllowDrop = true;
             DragEnter += new DragEventHandler(MainForm_DragEnter);
             DragDrop += new DragEventHandler(MainForm_DragDrop);
+            FormClosing += new FormClosingEventHandler((sender, e) => TranslatorServer.Instance.StopServer());
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
@@ -215,6 +217,16 @@ namespace JapaneseToRomajiFilenameConverter {
                 ConvertBTN.Enabled = false;
             else if(FilesBox.Items.Count > 0)
                 ConvertBTN.Enabled = true;
+        }
+
+        private void StartServerBTN_Click(object sender, EventArgs e) {
+
+            TranslatorServer.Instance.StartServer();
+        }
+
+        private void StopServerBTN_Click(object sender, EventArgs e) {
+
+            TranslatorServer.Instance.StopServer();
         }
     }
 }

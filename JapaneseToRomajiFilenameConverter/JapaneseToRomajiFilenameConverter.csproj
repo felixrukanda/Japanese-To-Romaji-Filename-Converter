@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\TranslatorServer.cs" />
     <Compile Include="Converter\ConversionData.cs" />
     <Compile Include="Converter\ConversionItem.cs" />
     <Compile Include="Converter\FileConverter.cs" />
@@ -181,6 +182,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="res\particles\kata-en_particles.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="res\pykakasi\pykakasi_api.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
