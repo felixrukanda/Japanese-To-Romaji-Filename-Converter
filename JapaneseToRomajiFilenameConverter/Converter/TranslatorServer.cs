@@ -20,14 +20,19 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
         Process libreTranslateServer;
         Process pykakasiServer;
 
-        public bool IsServerRunning() {
+        bool IsLibreTranslateServerRunning() {
 
-            return libreTranslateServer != null && pykakasiServer != null && !libreTranslateServer.HasExited && !pykakasiServer.HasExited;
+            return libreTranslateServer != null && !libreTranslateServer.HasExited;
+        }
+
+        bool IsPykakasiServerRunning() {
+
+            return pykakasiServer != null && !pykakasiServer.HasExited;
         }
 
         public void StartServer() {
 
-            if(!IsServerRunning()) {
+            if(!IsLibreTranslateServerRunning()) {
 
                 if(libreTranslateServer == null) {
 
@@ -38,6 +43,9 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
                 }
 
                 libreTranslateServer.Start();
+            }
+
+            if(!IsPykakasiServerRunning()) {
 
                 if(pykakasiServer == null) {
 
@@ -53,11 +61,11 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
 
         public void StopServer() {
 
-            if(IsServerRunning()) {
-
+            if(IsLibreTranslateServerRunning())
                 libreTranslateServer.CloseMainWindow();
+
+            if(IsPykakasiServerRunning())
                 pykakasiServer.CloseMainWindow();
-            }
         }
 
         public void RestartServer() {
