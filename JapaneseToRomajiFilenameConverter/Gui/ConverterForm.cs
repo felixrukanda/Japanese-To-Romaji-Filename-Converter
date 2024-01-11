@@ -17,6 +17,7 @@ namespace JapaneseToRomajiFilenameConverter {
 
         private int ConvertedFiles = 0;
         private int TotalFiles = 0;
+        private bool FormShown;
 
         public ConverterForm() {
             InitializeComponent();
@@ -36,6 +37,11 @@ namespace JapaneseToRomajiFilenameConverter {
             ProgressBox.LanguageOption = RichTextBoxLanguageOptions.DualFont;
         }
 
+        private void ConverterForm_Shown(object sender, EventArgs e) {
+
+            FormShown = true;
+        }
+
         private void ConverterForm_FormClosed(object sender, FormClosedEventArgs e) {
             // Stop async file conversion task
             if (FileConversionTaskCts != null) {
@@ -51,14 +57,22 @@ namespace JapaneseToRomajiFilenameConverter {
 
             // Async file conversion task
             FileConversionTaskCts = new CancellationTokenSource();
-            FileConversionTask = fileConverter.ConvertAsync(files, FileConversionTaskCts.Token, convertFileName, convertTitle, convertArtist, convertAlbum, convertAlbumArtist);/*Task.Factory.StartNew(() => {
-                try {
-                    fileConverter.Convert(files, FileConversionTaskCts.Token);
-                } catch (OperationCanceledException) {
-                    // Task cancelled
-                }
-            });*/
-            await FileConversionTask;
+            FileConversionTask = fileConverter.ConvertAsync(files, FileConversionTaskCts.Token, convertFileName, convertTitle, convertArtist, convertAlbum, convertAlbumArtist);
+
+            try {
+                await FileConversionTask;
+            } catch(Exception e) {
+
+                while(!FormShown)
+                    await Task.Delay(100);
+
+                if(e is System.Net.Http.HttpRequestException)
+                    MessageBox.Show(e.Message + "\n\nPlease check if the translator server is running.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Close();
+            }
         }
 
         public async void RevertFiles(List<ConversionItem> fileItems) {

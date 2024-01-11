@@ -70,6 +70,7 @@
             this.Text = "Conversion Progress";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ConverterForm_FormClosed);
             this.Load += new System.EventHandler(this.ConverterForm_Load);
+            this.Shown += new System.EventHandler(this.ConverterForm_Shown);
             this.ResumeLayout(false);
 
         }

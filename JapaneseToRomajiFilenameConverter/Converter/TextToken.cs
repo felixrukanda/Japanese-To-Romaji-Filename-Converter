@@ -242,6 +242,7 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
                         };
 
                         var response = await client.PostAsJsonAsync(url, values, JsonSerializerOptions.Default);
+                        response.EnsureSuccessStatusCode();
                         var responseContent = await response.Content.ReadFromJsonAsync<ServerResponse>();
                         translation = FormatTranslation(responseContent.translatedText, maps, particles);
                         break;
@@ -259,6 +260,7 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
                         };
 
                         var response = await client.PostAsJsonAsync(url, values, JsonSerializerOptions.Default);
+                        response.EnsureSuccessStatusCode();
                         var responseContent = await response.Content.ReadFromJsonAsync<ServerResponse>();
                         translation = FormatTranslation(responseContent.translatedText, maps, particles);
                         break;
