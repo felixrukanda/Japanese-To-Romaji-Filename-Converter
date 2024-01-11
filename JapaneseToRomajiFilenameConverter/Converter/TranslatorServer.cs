@@ -42,7 +42,7 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
                 if(pykakasiServer == null) {
 
                     pykakasiServer = new Process();
-                    pykakasiServer.StartInfo = new ProcessStartInfo("python", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "res/pykakasi_api.py")) {
+                    pykakasiServer.StartInfo = new ProcessStartInfo("python", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "res/pykakasi/pykakasi_api.py")) {
                         UseShellExecute = false
                     };
                 }
