@@ -23,6 +23,8 @@ namespace JapaneseToRomajiFilenameConverter {
         public MainForm() {
             InitializeComponent();
 
+            convertFileName = convertTitle = convertArtist = convertAlbum = convertAlbumArtist = true;
+
             AllowDrop = true;
             DragEnter += new DragEventHandler(MainForm_DragEnter);
             DragDrop += new DragEventHandler(MainForm_DragDrop);
@@ -213,7 +215,7 @@ namespace JapaneseToRomajiFilenameConverter {
 
         private void CheckConvertButton() {
 
-            if(convertFileName == convertTitle == convertArtist == convertAlbum == convertAlbumArtist == false)
+            if(!convertFileName && !convertTitle && !convertArtist && !convertAlbum && !convertAlbumArtist)
                 ConvertBTN.Enabled = false;
             else if(FilesBox.Items.Count > 0)
                 ConvertBTN.Enabled = true;
