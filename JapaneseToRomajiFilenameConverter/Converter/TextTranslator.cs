@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 namespace JapaneseToRomajiFilenameConverter.Converter {
     public class TextTranslator {
 
-        // kanji & hiragana use pykakashi
         // katakana use libretranslate
-        private const string TranslatorUrlHiraganaKanji = "http://127.0.0.2:5000/translate";
         private const string TranslatorUrlKatakana = "http://127.0.0.1:5000/translate";
         private static char MapSplitChar = ':';
 
@@ -18,12 +16,9 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
             "Iru"
         };
 
-        public static string GetTranslatorUrl(bool isHiraganaKanji) {
+        public static string GetTranslatorUrl() {
 
-            if(isHiraganaKanji)
-                return string.Format(TranslatorUrlHiraganaKanji);
-            else
-                return string.Format(TranslatorUrlKatakana);
+            return string.Format(TranslatorUrlKatakana);
         }
 
         public static async Task<string> TranslateAsync(string inText) {

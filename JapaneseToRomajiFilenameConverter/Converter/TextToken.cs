@@ -245,7 +245,7 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
 
                 case TokenType.Katakana: {
                         // Get translated text
-                        string url = TextTranslator.GetTranslatorUrl(false);
+                        string url = TextTranslator.GetTranslatorUrl();
 
                         var values = new Dictionary<string, string> {
                             { "q", Text },
