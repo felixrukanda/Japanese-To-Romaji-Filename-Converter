@@ -23,12 +23,6 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
         public string Text { get; set; }
         public string Prefix { get; set; }
 
-        public static Dictionary<string, string> PunctuationMap { get; } = new Dictionary<string, string>() {
-            { "、", ", " },
-            { "“", "\"" },
-            { "”", "\"" }
-        };
-
         public TextToken(TokenType type, string text = "", string prefix = "") {
             Type = type;
             Text = text;
@@ -125,6 +119,7 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
                             hasPrefix = true;
                             break;
 
+                        case '。':
                         case '、':
                         case ',':
                         case '“':
@@ -301,12 +296,7 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
                 case TokenType.Latin:
                 default:
                     // Replace japanese punctuation
-                    foreach (string s in PunctuationMap.Keys) {
-                        string sVal;
-                        if (PunctuationMap.TryGetValue(s, out sVal)) {
-                            translatedText = translatedText.Replace(s, sVal);
-                        }
-                    }
+                    translatedText = TextTranslator.MapPunctuations(translatedText, maps);
 
                     // Join
                     outText = Prefix + translatedText;

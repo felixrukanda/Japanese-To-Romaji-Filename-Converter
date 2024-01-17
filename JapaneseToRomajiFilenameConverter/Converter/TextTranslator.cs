@@ -11,6 +11,7 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
         // katakana use libretranslate
         private const string TranslatorUrlKatakana = "http://127.0.0.1:5000/translate";
         private static char MapSplitChar = ':';
+        private static char PunctMapSplitChar = '#';
 
         private static List<string> Suffixes = new List<string>() {
             "Iru"
@@ -45,6 +46,9 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
             string kataParticlesPath = Path.Combine(Particles.DirectoryPath, Particles.KataEn);
             List<string> kataParticles = new List<string>(File.ReadAllLines(kataParticlesPath));
 
+            string punctMapPath = Path.Combine(Maps.DirectoryPath, Maps.Punctuation);
+            List<string> punctMaps = new List<string>(File.ReadAllLines(punctMapPath));
+
             // Translate each token and join them back together
             string outText = "";
             foreach (TextToken textToken in textTokens) {
@@ -59,7 +63,7 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
 
                     case TokenType.Latin:
                     default:
-                        outText += await textToken.TranslateAsync();
+                        outText += await textToken.TranslateAsync(punctMaps);
                         break;
                 }
             }
@@ -70,14 +74,14 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
             return outText;
         }
 
-        public static string MapPhrases(string text, List<string> maps) {
+        public static string MapPhrases(string text, List<string> maps, char splitter) {
             if (maps == null) return text;
 
             foreach (string map in maps) {
-                string[] mapStrings = map.Split(MapSplitChar);
+                string[] mapStrings = map.Split(splitter);
 
                 // Make sure mapping is valid
-                if (map.IndexOf(MapSplitChar) == 0 || (mapStrings.Length != 1 && mapStrings.Length != 2)) continue;
+                if (map.IndexOf(splitter) == 0 || (mapStrings.Length != 1 && mapStrings.Length != 2)) continue;
 
                 text = Regex.Replace(text,
                     mapStrings[0],
@@ -86,6 +90,16 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
             }
 
             return text;
+        }
+
+        public static string MapPhrases(string text, List<string> maps) {
+
+            return MapPhrases(text, maps, MapSplitChar);
+        }
+
+        public static string MapPunctuations(string text, List<string> maps) {
+
+            return MapPhrases(text, maps, PunctMapSplitChar);
         }
 
         public static string LowercaseParticles(string text, List<string> particles) {
