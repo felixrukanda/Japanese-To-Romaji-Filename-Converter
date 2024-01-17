@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\LibNMeCab.IpaDicBin.0.10.0\build\LibNMeCab.IpaDicBin.props" Condition="Exists('..\packages\LibNMeCab.IpaDicBin.0.10.0\build\LibNMeCab.IpaDicBin.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -28,6 +29,8 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,6 +52,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Kawazu, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Kawazu.1.1.4\lib\netstandard2.0\Kawazu.dll</HintPath>
+    </Reference>
+    <Reference Include="LibNMeCab, Version=0.10.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LibNMeCab.0.10.1\lib\netstandard2.0\LibNMeCab.dll</HintPath>
+    </Reference>
+    <Reference Include="LibNMeCab.IpaDicBin, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LibNMeCab.IpaDicBin.0.10.0\lib\netstandard2.0\LibNMeCab.IpaDicBin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -157,6 +169,16 @@
     <EmbeddedResource Include="Gui\ReverterForm.resx">
       <DependentUpon>ReverterForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="AUTHORS" />
+    <None Include="char.bin" />
+    <None Include="COPYING" />
+    <None Include="IpaDic\AUTHORS" />
+    <None Include="IpaDic\char.bin" />
+    <None Include="IpaDic\COPYING" />
+    <None Include="IpaDic\matrix.bin" />
+    <None Include="IpaDic\sys.dic" />
+    <None Include="IpaDic\unk.dic" />
+    <None Include="matrix.bin" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -167,6 +189,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="sys.dic" />
+    <None Include="unk.dic" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -201,6 +225,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\LibNMeCab.IpaDicBin.0.10.0\build\LibNMeCab.IpaDicBin.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LibNMeCab.IpaDicBin.0.10.0\build\LibNMeCab.IpaDicBin.props'))" />
+    <Error Condition="!Exists('..\packages\LibNMeCab.IpaDicBin.0.10.0\build\LibNMeCab.IpaDicBin.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LibNMeCab.IpaDicBin.0.10.0\build\LibNMeCab.IpaDicBin.targets'))" />
+  </Target>
+  <Import Project="..\packages\LibNMeCab.IpaDicBin.0.10.0\build\LibNMeCab.IpaDicBin.targets" Condition="Exists('..\packages\LibNMeCab.IpaDicBin.0.10.0\build\LibNMeCab.IpaDicBin.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

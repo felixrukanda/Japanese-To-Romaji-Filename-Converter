@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Kawazu;
 
 namespace JapaneseToRomajiFilenameConverter.Converter {
 
@@ -16,6 +17,7 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
         }
 
         private static readonly HttpClient client = new HttpClient();
+        private static KawazuConverter kawazuConverter = new KawazuConverter();
 
         public TokenType Type { get; private set; }
         public string Text { get; set; }
@@ -235,16 +237,9 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
 
                 case TokenType.HiraganaKanji: {
                         // Get phoentic text
-                        string url = TextTranslator.GetTranslatorUrl(true);
 
-                        var values = new Dictionary<string, string> {
-                            { "q", Text }
-                        };
-
-                        var response = await client.PostAsJsonAsync(url, values, JsonSerializerOptions.Default);
-                        response.EnsureSuccessStatusCode();
-                        var responseContent = await response.Content.ReadFromJsonAsync<ServerResponse>();
-                        translation = FormatTranslation(responseContent.translatedText, maps, particles);
+                        translation = await kawazuConverter.Convert(Text, To.Romaji, Mode.Spaced, RomajiSystem.Hepburn);
+                        translation = FormatTranslation(translation, maps, particles);
                         break;
                     }
 
