@@ -49,9 +49,9 @@ namespace JapaneseToRomajiFilenameConverter {
             // 
             this.ConvertBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ConvertBTN.Enabled = false;
-            this.ConvertBTN.Location = new System.Drawing.Point(1102, 12);
+            this.ConvertBTN.Location = new System.Drawing.Point(1080, 12);
             this.ConvertBTN.Name = "ConvertBTN";
-            this.ConvertBTN.Size = new System.Drawing.Size(95, 45);
+            this.ConvertBTN.Size = new System.Drawing.Size(117, 45);
             this.ConvertBTN.TabIndex = 1;
             this.ConvertBTN.Text = "Convert";
             this.ConvertBTN.UseVisualStyleBackColor = true;
@@ -60,9 +60,9 @@ namespace JapaneseToRomajiFilenameConverter {
             // AddBTN
             // 
             this.AddBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddBTN.Location = new System.Drawing.Point(1102, 401);
+            this.AddBTN.Location = new System.Drawing.Point(1080, 402);
             this.AddBTN.Name = "AddBTN";
-            this.AddBTN.Size = new System.Drawing.Size(95, 35);
+            this.AddBTN.Size = new System.Drawing.Size(117, 35);
             this.AddBTN.TabIndex = 2;
             this.AddBTN.Text = "Add Files";
             this.AddBTN.UseVisualStyleBackColor = true;
@@ -72,9 +72,9 @@ namespace JapaneseToRomajiFilenameConverter {
             // 
             this.RemoveBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.RemoveBTN.Enabled = false;
-            this.RemoveBTN.Location = new System.Drawing.Point(1102, 442);
+            this.RemoveBTN.Location = new System.Drawing.Point(1080, 443);
             this.RemoveBTN.Name = "RemoveBTN";
-            this.RemoveBTN.Size = new System.Drawing.Size(95, 35);
+            this.RemoveBTN.Size = new System.Drawing.Size(117, 35);
             this.RemoveBTN.TabIndex = 3;
             this.RemoveBTN.Text = "Remove Files";
             this.RemoveBTN.UseVisualStyleBackColor = true;
@@ -90,7 +90,7 @@ namespace JapaneseToRomajiFilenameConverter {
             this.DragDropLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.DragDropLabel.Location = new System.Drawing.Point(36, 37);
             this.DragDropLabel.Name = "DragDropLabel";
-            this.DragDropLabel.Size = new System.Drawing.Size(1038, 443);
+            this.DragDropLabel.Size = new System.Drawing.Size(1017, 444);
             this.DragDropLabel.TabIndex = 0;
             this.DragDropLabel.Text = "Drag and Drop Files";
             this.DragDropLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -99,9 +99,9 @@ namespace JapaneseToRomajiFilenameConverter {
             // 
             this.ClearBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ClearBTN.Enabled = false;
-            this.ClearBTN.Location = new System.Drawing.Point(1102, 483);
+            this.ClearBTN.Location = new System.Drawing.Point(1080, 484);
             this.ClearBTN.Name = "ClearBTN";
-            this.ClearBTN.Size = new System.Drawing.Size(95, 35);
+            this.ClearBTN.Size = new System.Drawing.Size(117, 35);
             this.ClearBTN.TabIndex = 3;
             this.ClearBTN.Text = "Clear Files";
             this.ClearBTN.UseVisualStyleBackColor = true;
@@ -112,7 +112,7 @@ namespace JapaneseToRomajiFilenameConverter {
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.totalFilesLabel,
             this.selectedFilesLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 528);
+            this.statusStrip.Location = new System.Drawing.Point(0, 529);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(1209, 22);
             this.statusStrip.TabIndex = 4;
@@ -133,9 +133,9 @@ namespace JapaneseToRomajiFilenameConverter {
             // HistoryBTN
             // 
             this.HistoryBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.HistoryBTN.Location = new System.Drawing.Point(1102, 63);
+            this.HistoryBTN.Location = new System.Drawing.Point(1080, 63);
             this.HistoryBTN.Name = "HistoryBTN";
-            this.HistoryBTN.Size = new System.Drawing.Size(95, 45);
+            this.HistoryBTN.Size = new System.Drawing.Size(117, 45);
             this.HistoryBTN.TabIndex = 1;
             this.HistoryBTN.Text = "View Conversion History";
             this.HistoryBTN.UseVisualStyleBackColor = true;
@@ -143,75 +143,80 @@ namespace JapaneseToRomajiFilenameConverter {
             // 
             // FileName
             // 
+            this.FileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FileName.AutoSize = true;
             this.FileName.Checked = true;
             this.FileName.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.FileName.Location = new System.Drawing.Point(1102, 124);
+            this.FileName.Location = new System.Drawing.Point(1080, 124);
             this.FileName.Name = "FileName";
-            this.FileName.Size = new System.Drawing.Size(73, 17);
+            this.FileName.Size = new System.Drawing.Size(108, 17);
             this.FileName.TabIndex = 6;
-            this.FileName.Text = "File Name";
+            this.FileName.Text = "Convert Filename";
             this.FileName.UseVisualStyleBackColor = true;
             this.FileName.CheckedChanged += new System.EventHandler(this.FileName_CheckedChanged);
             // 
             // Title
             // 
+            this.Title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Title.AutoSize = true;
             this.Title.Checked = true;
             this.Title.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Title.Location = new System.Drawing.Point(1102, 147);
+            this.Title.Location = new System.Drawing.Point(1080, 147);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(46, 17);
+            this.Title.Size = new System.Drawing.Size(86, 17);
             this.Title.TabIndex = 7;
-            this.Title.Text = "Title";
+            this.Title.Text = "Convert Title";
             this.Title.UseVisualStyleBackColor = true;
             this.Title.CheckedChanged += new System.EventHandler(this.Title_CheckedChanged);
             // 
             // Artist
             // 
+            this.Artist.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Artist.AutoSize = true;
             this.Artist.Checked = true;
             this.Artist.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Artist.Location = new System.Drawing.Point(1102, 170);
+            this.Artist.Location = new System.Drawing.Point(1080, 170);
             this.Artist.Name = "Artist";
-            this.Artist.Size = new System.Drawing.Size(49, 17);
+            this.Artist.Size = new System.Drawing.Size(89, 17);
             this.Artist.TabIndex = 8;
-            this.Artist.Text = "Artist";
+            this.Artist.Text = "Convert Artist";
             this.Artist.UseVisualStyleBackColor = true;
             this.Artist.CheckedChanged += new System.EventHandler(this.Artist_CheckedChanged);
             // 
             // Album
             // 
+            this.Album.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Album.AutoSize = true;
             this.Album.Checked = true;
             this.Album.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Album.Location = new System.Drawing.Point(1102, 193);
+            this.Album.Location = new System.Drawing.Point(1080, 193);
             this.Album.Name = "Album";
-            this.Album.Size = new System.Drawing.Size(55, 17);
+            this.Album.Size = new System.Drawing.Size(95, 17);
             this.Album.TabIndex = 9;
-            this.Album.Text = "Album";
+            this.Album.Text = "Convert Album";
             this.Album.UseVisualStyleBackColor = true;
             this.Album.CheckedChanged += new System.EventHandler(this.Album_CheckedChanged);
             // 
             // AlbumArtist
             // 
+            this.AlbumArtist.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.AlbumArtist.AutoSize = true;
             this.AlbumArtist.Checked = true;
             this.AlbumArtist.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AlbumArtist.Location = new System.Drawing.Point(1102, 216);
+            this.AlbumArtist.Location = new System.Drawing.Point(1080, 216);
             this.AlbumArtist.Name = "AlbumArtist";
-            this.AlbumArtist.Size = new System.Drawing.Size(81, 17);
+            this.AlbumArtist.Size = new System.Drawing.Size(121, 17);
             this.AlbumArtist.TabIndex = 10;
-            this.AlbumArtist.Text = "Album Artist";
+            this.AlbumArtist.Text = "Convert Album Artist";
             this.AlbumArtist.UseVisualStyleBackColor = true;
             this.AlbumArtist.CheckedChanged += new System.EventHandler(this.AlbumArtist_CheckedChanged);
             // 
             // StartServerBTN
             // 
             this.StartServerBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.StartServerBTN.Location = new System.Drawing.Point(1102, 251);
+            this.StartServerBTN.Location = new System.Drawing.Point(1080, 251);
             this.StartServerBTN.Name = "StartServerBTN";
-            this.StartServerBTN.Size = new System.Drawing.Size(95, 45);
+            this.StartServerBTN.Size = new System.Drawing.Size(117, 45);
             this.StartServerBTN.TabIndex = 11;
             this.StartServerBTN.Text = "Start Translator Server";
             this.StartServerBTN.UseVisualStyleBackColor = true;
@@ -220,9 +225,9 @@ namespace JapaneseToRomajiFilenameConverter {
             // StopServerBTN
             // 
             this.StopServerBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.StopServerBTN.Location = new System.Drawing.Point(1102, 302);
+            this.StopServerBTN.Location = new System.Drawing.Point(1080, 302);
             this.StopServerBTN.Name = "StopServerBTN";
-            this.StopServerBTN.Size = new System.Drawing.Size(95, 45);
+            this.StopServerBTN.Size = new System.Drawing.Size(117, 45);
             this.StopServerBTN.TabIndex = 12;
             this.StopServerBTN.Text = "Stop Translator Server";
             this.StopServerBTN.UseVisualStyleBackColor = true;
@@ -237,11 +242,12 @@ namespace JapaneseToRomajiFilenameConverter {
             this.FilesBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FilesBox.FormattingEnabled = true;
             this.FilesBox.HorizontalScrollbar = true;
+            this.FilesBox.IntegralHeight = false;
             this.FilesBox.ItemHeight = 100;
             this.FilesBox.Location = new System.Drawing.Point(13, 13);
             this.FilesBox.Name = "FilesBox";
             this.FilesBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.FilesBox.Size = new System.Drawing.Size(1083, 504);
+            this.FilesBox.Size = new System.Drawing.Size(1061, 505);
             this.FilesBox.TabIndex = 0;
             this.FilesBox.SelectedIndexChanged += new System.EventHandler(this.FilesBox_SelectedIndexChanged);
             // 
@@ -249,7 +255,7 @@ namespace JapaneseToRomajiFilenameConverter {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1209, 550);
+            this.ClientSize = new System.Drawing.Size(1209, 551);
             this.Controls.Add(this.StopServerBTN);
             this.Controls.Add(this.StartServerBTN);
             this.Controls.Add(this.AlbumArtist);
@@ -265,7 +271,7 @@ namespace JapaneseToRomajiFilenameConverter {
             this.Controls.Add(this.HistoryBTN);
             this.Controls.Add(this.ConvertBTN);
             this.Controls.Add(this.FilesBox);
-            this.MinimumSize = new System.Drawing.Size(433, 302);
+            this.MinimumSize = new System.Drawing.Size(433, 550);
             this.Name = "MainForm";
             this.Text = "Japanese to Romaji Filename Converter " + ProductVersion;
             this.Load += new System.EventHandler(this.MainForm_Load);
