@@ -116,7 +116,7 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
                         }
                     }
 
-                    newFilePath = directoryPath + Path.DirectorySeparatorChar + newFileName + extension;
+                    newFilePath = Path.Combine(directoryPath, newFileName + extension);
                     if(File.Exists(newFilePath)) {
                         ConversionData existingData = new ConversionData(newFilePath);
                         ConversionItem item = new ConversionItem(oldData, existingData);
