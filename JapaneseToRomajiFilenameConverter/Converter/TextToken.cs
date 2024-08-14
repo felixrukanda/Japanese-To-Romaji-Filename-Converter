@@ -235,7 +235,11 @@ namespace JapaneseToRomajiFilenameConverter.Converter {
 
                         translation = await kawazuConverter.Convert(Text, To.Romaji, Mode.Spaced, RomajiSystem.Hepburn);
                         translation = FormatTranslation(translation, maps, particles);
-                        break;
+
+                        if(string.IsNullOrEmpty(translation.Trim()))
+                            goto case TokenType.Katakana;
+                        else
+                            break;
                     }
 
                 case TokenType.Katakana: {
